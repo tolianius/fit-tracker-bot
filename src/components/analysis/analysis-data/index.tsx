@@ -13,13 +13,13 @@ export const AnalysisData = () => {
       <AnalysisDaily value={1400} maxValue={2013} />
       <Row gutter={[16, 16]}>
         <Col xs={8}>
-          <AnalysisProgress title={'Белки'} value={52.3} maxValue={99.7} color={'#8EDF81'} />
+          <AnalysisProgress title={'Белки'} value={52.3} maxValue={99.7} color={'#87A5C7'} />
         </Col>
         <Col xs={8}>
-          <AnalysisProgress title={'Жиры'} value={45.1} maxValue={29.5} color={'#D7A251'} />
+          <AnalysisProgress title={'Жиры'} value={45.1} maxValue={29.5} color={'#DBAD6F'} />
         </Col>
         <Col xs={8}>
-          <AnalysisProgress title={'Углеводы'} value={99.7} maxValue={166.2} color={'#A3A0CA'} />
+          <AnalysisProgress title={'Углеводы'} value={99.7} maxValue={166.2} color={'#C787B5'} />
         </Col>
       </Row>
     </Flex>
