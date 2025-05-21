@@ -1,7 +1,7 @@
 'use client';
 
-import { AnalysisData } from '@/components/analysis';
+import { AnalysisBlock } from '@/components/analysis';
 
 export default function HomePage() {
-  return <AnalysisData />;
+  return <AnalysisBlock />;
 }

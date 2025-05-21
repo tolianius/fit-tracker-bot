@@ -1,2 +1,2 @@
 export { AnalysisChart } from './analysis-chart';
-export { AnalysisData } from './analysis-data';
+export { AnalysisBlock } from './analysis-block';

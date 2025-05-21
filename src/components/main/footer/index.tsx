@@ -24,21 +24,21 @@ export const Footer = () => {
       <Flex gap={32} className={css.footerContainer}>
         <Button
           type="primary"
-          icon={<BarChartOutlined style={{ fontSize: '22px' }} />}
+          icon={<BarChartOutlined style={{ fontSize: '16px' }} />}
           shape="circle"
           size="large"
           onClick={onAnalysisClick}
         />
         <Button
           type="primary"
-          icon={<ScanOutlined style={{ fontSize: '22px' }} />}
+          icon={<ScanOutlined style={{ fontSize: '16px' }} />}
           shape="circle"
           size="large"
           onClick={onScanClick}
         />
         <Button
           type="primary"
-          icon={<UnorderedListOutlined style={{ fontSize: '22px' }} />}
+          icon={<UnorderedListOutlined style={{ fontSize: '16px' }} />}
           shape="circle"
           size="large"
         />

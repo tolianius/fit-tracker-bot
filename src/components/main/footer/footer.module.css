@@ -1,7 +1,7 @@
 .footerMask {
     left: 0;
     right: 0;
-    position: absolute;
+    position: fixed;
     bottom: 16px;
 }
 
@@ -12,7 +12,7 @@
     border-radius: 32px;
 
     & > button {
-        height: 52px !important;
-        width: 52px !important;
+        height: 38px !important;
+        width: 36px !important;
     }
 }

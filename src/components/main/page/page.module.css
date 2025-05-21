@@ -1,6 +1,11 @@
 .pageContainer {
     width: 100% !important;
-    padding: 16px !important;
     min-height: 100vh !important;
     position: relative;
+}
+
+.pageContent {
+    width: 100% !important;
+    flex: 1 !important;
+    padding: 16px 16px 84px !important;
 }

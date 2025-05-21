@@ -61,3 +61,9 @@ export interface INutriments {
   sugars_unit: string;
   sugars_value: number;
 }
+
+export interface INutriment {
+  proteins: number;
+  fat: number;
+  carbohydrates: number;
+}
