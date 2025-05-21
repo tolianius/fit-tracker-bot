@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
 import { BrowserMultiFormatReader, IScannerControls } from '@zxing/browser';
+import React, { useEffect, useRef, useState } from 'react';
 
 type Props = {
   onResult: (text: string) => void;
@@ -20,7 +20,7 @@ export const BarcodeScanner: React.FC<Props> = ({ onResult }) => {
         .decodeFromVideoDevice(undefined, videoRef.current!, (result, err, ctrl) => {
           controls = ctrl;
           if (result) {
-            onResult(result.getText());
+            onResult((result as any)?.getText());
             controls.stop();
           }
         })

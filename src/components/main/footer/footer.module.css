@@ -1,0 +1,13 @@
+.footerMask {
+    left: 0;
+    right: 0;
+    position: absolute;
+    bottom: 16px;
+}
+
+.footerContainer {
+    height: fit-content;
+    background-color: #FFFFFF;
+    padding: 8px 16px !important;
+    border-radius: 32px;
+}
