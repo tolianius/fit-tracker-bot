@@ -1,7 +1,7 @@
 'use client';
 
-import { AnalysisChart } from '@/components/analysis';
+import { AnalysisData } from '@/components/analysis';
 
 export default function HomePage() {
-  return <AnalysisChart />;
+  return <AnalysisData />;
 }

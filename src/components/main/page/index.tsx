@@ -7,7 +7,7 @@ import css from './page.module.css';
 
 export const Page = (props: PropsWithChildren) => {
   return (
-    <Flex className={css.pageContainer} vertical gap={16} align="center" style={{ width: '100%' }}>
+    <Flex className={css.pageContainer} vertical gap={16} align="center">
       {props.children}
       <Footer />
     </Flex>

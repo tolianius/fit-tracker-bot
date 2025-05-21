@@ -10,4 +10,9 @@
     background-color: #FFFFFF;
     padding: 8px 16px !important;
     border-radius: 32px;
+
+    & > button {
+        height: 52px !important;
+        width: 52px !important;
+    }
 }

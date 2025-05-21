@@ -1,0 +1,9 @@
+.dailyContainer {
+    padding: 16px !important;
+    border-radius: 16px;
+    background-color: #91C788 !important;
+
+    & > div span, & > div h1 {
+        color: #FFFFFF !important;
+    }
+}

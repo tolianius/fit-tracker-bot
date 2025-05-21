@@ -22,9 +22,26 @@ export const Footer = () => {
   return (
     <Flex className={css.footerMask} align="center" justify="center">
       <Flex gap={32} className={css.footerContainer}>
-        <Button type="primary" icon={<BarChartOutlined />} shape="circle" size="large" onClick={onAnalysisClick} />
-        <Button type="primary" icon={<ScanOutlined />} shape="circle" size="large" onClick={onScanClick} />
-        <Button type="primary" icon={<UnorderedListOutlined />} shape="circle" size="large" />
+        <Button
+          type="primary"
+          icon={<BarChartOutlined style={{ fontSize: '22px' }} />}
+          shape="circle"
+          size="large"
+          onClick={onAnalysisClick}
+        />
+        <Button
+          type="primary"
+          icon={<ScanOutlined style={{ fontSize: '22px' }} />}
+          shape="circle"
+          size="large"
+          onClick={onScanClick}
+        />
+        <Button
+          type="primary"
+          icon={<UnorderedListOutlined style={{ fontSize: '22px' }} />}
+          shape="circle"
+          size="large"
+        />
       </Flex>
     </Flex>
   );

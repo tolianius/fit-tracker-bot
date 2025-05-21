@@ -1,4 +1,3 @@
-// components/NutritionPieChart.tsx
 'use client';
 
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';

@@ -1,4 +1,5 @@
 .pageContainer {
+    width: 100% !important;
     padding: 16px !important;
     min-height: 100vh !important;
     position: relative;
