@@ -13,7 +13,7 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
-    command: npm run build:dev
+    command: npm run build
 
 volumes:
   node_modules:
