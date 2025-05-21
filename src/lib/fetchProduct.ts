@@ -1,4 +1,6 @@
-export async function fetchProduct(barcode: string) {
+import { IProduct } from '@/model/product';
+
+export const fetchProduct = async (barcode: string): Promise<IProduct | null> => {
   const res = await fetch(`https://world.openfoodfacts.org/api/v0/product/${barcode}.json`);
 
   if (!res.ok) {
@@ -12,4 +14,4 @@ export async function fetchProduct(barcode: string) {
   }
 
   return data.product;
-}
+};

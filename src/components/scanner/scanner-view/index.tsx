@@ -39,7 +39,7 @@ export const ScannerView = () => {
       {barcode && (
         <Flex vertical gap={8}>
           <Typography.Text>
-            📦 Штрихкод: <strong>{barcode}</strong>
+            <strong>Штрихкод:</strong> {barcode}
           </Typography.Text>
           {error && <Typography.Text>{error}</Typography.Text>}
           {product && (
@@ -49,6 +49,11 @@ export const ScannerView = () => {
               </Typography.Text>
               <Typography.Text>
                 <strong>Бренд:</strong> {product.brands}
+              </Typography.Text>
+              <Typography.Text>
+                <strong>БЖУ:</strong> {product?.nutriments?.proteins} {product?.nutriments?.proteins_unit} |{' '}
+                {product?.nutriments?.fat} {product?.nutriments?.fat_unit} | {product?.nutriments?.carbohydrates}{' '}
+                {product?.nutriments?.carbohydrates_unit}
               </Typography.Text>
               {product.image_front_small_url && (
                 <Image
