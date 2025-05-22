@@ -1,15 +1,14 @@
 import { Flex, Typography } from 'antd';
-import Image from 'next/image';
 import React, { useState } from 'react';
 
+import { ProductItem } from '@/components/product';
 import { BarcodeScanner } from '@/components/shared';
+import { fakedata } from '@/const/fakedata';
 import { fetchProduct } from '@/lib/fetchProduct';
-
-import css from './scanner-view.module.css';
 
 export const ScannerView = () => {
   const [barcode, setBarcode] = useState<string | null>(null);
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<any>(fakedata);
   const [error, setError] = useState<string | null>(null);
 
   const handleScan = async (code: string) => {
@@ -32,40 +31,16 @@ export const ScannerView = () => {
   };
 
   return (
-    <Flex vertical align="center">
-      <Typography.Title>Наведите камеру на штрихкод</Typography.Title>
+    <Flex vertical style={{ width: '100%' }}>
       {!barcode && <BarcodeScanner onResult={handleScan} />}
 
       {barcode && (
-        <Flex vertical gap={8}>
-          <Typography.Text>
-            <strong>Штрихкод:</strong> {barcode}
-          </Typography.Text>
+        <Flex vertical gap={16}>
+          <Typography.Title level={3} style={{ textAlign: 'center' }}>
+            Продукт
+          </Typography.Title>
+          {product && <ProductItem product={product} />}
           {error && <Typography.Text>{error}</Typography.Text>}
-          {product && (
-            <Flex vertical gap={8}>
-              <Typography.Text>
-                <strong>Название:</strong> {product.product_name || 'Не указано'}
-              </Typography.Text>
-              <Typography.Text>
-                <strong>Бренд:</strong> {product.brands}
-              </Typography.Text>
-              <Typography.Text>
-                <strong>БЖУ:</strong> {product?.nutriments?.proteins} {product?.nutriments?.proteins_unit} |{' '}
-                {product?.nutriments?.fat} {product?.nutriments?.fat_unit} | {product?.nutriments?.carbohydrates}{' '}
-                {product?.nutriments?.carbohydrates_unit}
-              </Typography.Text>
-              {product.image_front_small_url && (
-                <Image
-                  src={product.image_front_small_url}
-                  width={200}
-                  height={200}
-                  alt="product"
-                  className={css.scannerView}
-                />
-              )}
-            </Flex>
-          )}
         </Flex>
       )}
     </Flex>

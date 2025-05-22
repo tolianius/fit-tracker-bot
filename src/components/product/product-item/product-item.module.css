@@ -1,0 +1,21 @@
+.productHeader {
+    width: 100%;
+    background-color: #91C788 !important;
+    padding: 16px !important;
+    border-radius: 16px;
+
+    & img {
+        object-fit: contain !important;
+    }
+
+    & div h5, & div span {
+        color: #FFFFFF !important;
+    }
+}
+
+.productInfo {
+    width: 100% !important;
+    background-color: #0000000f !important;
+    padding: 16px !important;
+    border-radius: 16px !important;
+}

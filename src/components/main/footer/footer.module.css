@@ -7,12 +7,16 @@
 
 .footerContainer {
     height: fit-content;
-    background-color: #FFFFFF;
+    background-color: #91C788;
     padding: 8px 16px !important;
     border-radius: 32px;
 
     & > button {
         height: 38px !important;
         width: 36px !important;
+
+        & > svg {
+            color: #EDF7FD !important;
+        }
     }
 }

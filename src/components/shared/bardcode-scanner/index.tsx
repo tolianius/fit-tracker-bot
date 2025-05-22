@@ -1,7 +1,10 @@
 'use client';
 
 import { BrowserMultiFormatReader, IScannerControls } from '@zxing/browser';
+import { Flex, Typography } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
+
+import css from './bardcode-scanner.module.css';
 
 type Props = {
   onResult: (text: string) => void;
@@ -37,9 +40,10 @@ export const BarcodeScanner: React.FC<Props> = ({ onResult }) => {
 
   // TODO: ПОПРАВИТЬ СТИЛИ И ВЫВОД ОШИБКИ В ПОП АП
   return (
-    <div>
-      <video ref={videoRef} style={{ width: '100%', borderRadius: '8px' }} />
-      {error && <p>{error}</p>}
-    </div>
+    <Flex vertical className={css.barcodeContainer}>
+      <Typography.Title level={4}>Отсканируйте штрихкод</Typography.Title>
+      <video className={css.barcode} ref={videoRef} />
+      {error && <Typography.Text>{error}</Typography.Text>}
+    </Flex>
   );
 };

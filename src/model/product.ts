@@ -1,11 +1,14 @@
 export interface IProduct {
   code: string;
-  product: {
-    product_name: string;
-    image_front_small_url: string;
-    brands: string;
-    nutriments: INutriments;
-  };
+  product: IProductInfo;
+}
+
+export interface IProductInfo {
+  quantity: string;
+  product_name: string;
+  image_front_small_url: string;
+  brands: string;
+  nutriments: INutriments;
 }
 
 export interface INutriments {
