@@ -3,12 +3,11 @@ import React, { useState } from 'react';
 
 import { ProductItem } from '@/components/product';
 import { BarcodeScanner } from '@/components/shared';
-import { fakedata } from '@/const/fakedata';
 import { fetchProduct } from '@/lib/fetchProduct';
 
 export const ScannerView = () => {
   const [barcode, setBarcode] = useState<string | null>(null);
-  const [product, setProduct] = useState<any>(fakedata);
+  const [product, setProduct] = useState<any>();
   const [error, setError] = useState<string | null>(null);
 
   const handleScan = async (code: string) => {
