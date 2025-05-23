@@ -1,4 +1,5 @@
 export const APP_ROUTES = {
   ANALYSIS: '/',
-  SCANNER: '/scanner'
+  SCANNER: '/scanner',
+  PROFILE: '/profile'
 };

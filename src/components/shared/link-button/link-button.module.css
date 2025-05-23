@@ -1,0 +1,15 @@
+.linkButton {
+    & > span svg {
+        color: #91C788 !important;
+    }
+}
+
+.linkIcon {
+    background-color: #91C788;
+    padding: 8px !important;
+    border-radius: 50%;
+
+    & > span svg {
+        color: #FFFFFF !important;
+    }
+}

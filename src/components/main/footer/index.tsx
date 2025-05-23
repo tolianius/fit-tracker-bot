@@ -19,6 +19,10 @@ export const Footer = () => {
     replace(APP_ROUTES.SCANNER);
   };
 
+  const onProfileClick = () => {
+    replace(APP_ROUTES.PROFILE);
+  };
+
   return (
     <Flex className={css.footerMask} align="center" justify="center">
       <Flex gap={32} className={css.footerContainer}>
@@ -41,6 +45,7 @@ export const Footer = () => {
           icon={<UnorderedListOutlined style={{ fontSize: '16px' }} />}
           shape="circle"
           size="large"
+          onClick={onProfileClick}
         />
       </Flex>
     </Flex>

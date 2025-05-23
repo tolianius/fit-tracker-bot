@@ -1,0 +1,8 @@
+.profileContainer {
+    padding: 0 32px !important;
+}
+
+.profileAvatar {
+    height: 160px !important;
+    width: 160px !important;
+}
