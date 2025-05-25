@@ -11,6 +11,16 @@ interface IProps {
 
 export const MacronutrientProgress = (props: IProps) => {
   const { nutriments } = props;
+
+  if (nutriments.fat === 0 && nutriments.proteins === 0 && nutriments.carbohydrates === 0) {
+    return (
+      <Flex vertical>
+        <Progress showInfo={false} percent={0} strokeWidth={4} />
+        <Typography.Text type="secondary">требуется заполнить</Typography.Text>
+      </Flex>
+    );
+  }
+
   const data = [
     { label: 'Белки', grams: nutriments.proteins, color: PROTEINS_COLOR },
     { label: 'Жиры', grams: nutriments.fat, color: FAT_COLOR },

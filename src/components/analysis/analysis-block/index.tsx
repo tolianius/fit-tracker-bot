@@ -3,17 +3,50 @@
 import { StarOutlined, UploadOutlined } from '@ant-design/icons';
 import { Button, Col, Flex, Row, Typography } from 'antd';
 import dayjs from 'dayjs';
+import { useEffect, useMemo, useState } from 'react';
 
+import { getMealsByUser } from '@/api';
 import { AnalysisProgress } from '@/components/analysis/analysis-progress';
 import { AnalysisWeekProgress } from '@/components/analysis/analysis-week-progress';
 import { MealItem } from '@/components/meal';
 import { CARBOHYDRATES_COLOR, FAT_COLOR, PROTEINS_COLOR } from '@/const/colors';
 import { DEFAULT_DATE_FORMAT } from '@/const/date';
+import { Meal, MealType } from '@/model/meal';
 
 import { AnalysisDailyScore } from '../analysis-daily-score';
 import css from './analysis-block.module.css';
 
 export const AnalysisBlock = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [dailyMeal, setDailyMeal] = useState<Meal[]>([]);
+
+  useEffect(() => {
+    const tgId = window?.Telegram?.WebApp?.initDataUnsafe?.user?.id;
+    if (!isLoading && tgId) {
+      setIsLoading(true);
+      getMealsByUser(tgId.toString(), dayjs(new Date()).format('YYYY-MM-DD')).then(setDailyMeal);
+      setIsLoading(false);
+    }
+  }, [isLoading]);
+
+  const dailyValue = useMemo(() => {
+    return dailyMeal.reduce((sum, meal) => sum + meal.kcal, 0);
+  }, [dailyMeal]);
+
+  const meals = useMemo(() => {
+    return [MealType.BREAKFAST, MealType.LUNCH, MealType.DINNER].map((type) => {
+      const filteredByType = dailyMeal.filter((x) => x.type === type);
+      return {
+        type,
+        nutriments: {
+          proteins: filteredByType.reduce((sum, meal) => sum + meal.protein, 0),
+          fat: filteredByType.reduce((sum, meal) => sum + meal.fat, 0),
+          carbohydrates: filteredByType.reduce((sum, meal) => sum + meal.carbs, 0)
+        }
+      };
+    });
+  }, [dailyMeal]);
+
   const onPremiumClick = () => {};
 
   const onShareClick = () => {};
@@ -37,7 +70,7 @@ export const AnalysisBlock = () => {
           onClick={onShareClick}
         />
       </Flex>
-      <AnalysisDailyScore value={1400} maxValue={2013} />
+      <AnalysisDailyScore value={dailyValue} maxValue={2013} />
       <Row gutter={[16, 16]}>
         <Col xs={8}>
           <AnalysisProgress title={'Белки'} value={52.3} maxValue={99.7} color={PROTEINS_COLOR} />
@@ -50,30 +83,9 @@ export const AnalysisBlock = () => {
         </Col>
       </Row>
       <AnalysisWeekProgress />
-      <MealItem
-        title="Завтрак"
-        nutriments={{
-          proteins: 22,
-          fat: 6.1,
-          carbohydrates: 1
-        }}
-      />
-      <MealItem
-        title="Обед"
-        nutriments={{
-          proteins: 12,
-          fat: 55.1,
-          carbohydrates: 22
-        }}
-      />
-      <MealItem
-        title="Ужин"
-        nutriments={{
-          proteins: 2,
-          fat: 6.1,
-          carbohydrates: 15
-        }}
-      />
+      {meals.map((item, index) => {
+        return <MealItem key={index} {...item} />;
+      })}
     </Flex>
   );
 };

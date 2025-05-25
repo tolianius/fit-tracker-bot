@@ -1,13 +1,15 @@
 import { Flex, Typography } from 'antd';
 import React, { useState } from 'react';
 
-import { ProductItem } from '@/components/product';
 import { BarcodeScanner } from '@/components/shared';
 import { fetchProduct } from '@/lib/fetchProduct';
+import { IProduct } from '@/model/product';
+
+import { ScannerProduct } from '../scanner-product';
 
 export const ScannerView = () => {
   const [barcode, setBarcode] = useState<string | null>(null);
-  const [product, setProduct] = useState<any>();
+  const [product, setProduct] = useState<IProduct>();
   const [error, setError] = useState<string | null>(null);
 
   const handleScan = async (code: string) => {
@@ -38,7 +40,7 @@ export const ScannerView = () => {
           <Typography.Title level={3} style={{ textAlign: 'center' }}>
             Продукт
           </Typography.Title>
-          {product && <ProductItem product={product} />}
+          {product && <ScannerProduct item={product} />}
           {error && <Typography.Text>{error}</Typography.Text>}
         </Flex>
       )}
