@@ -12,37 +12,66 @@ import { MealItem } from '@/components/meal';
 import { CARBOHYDRATES_COLOR, FAT_COLOR, PROTEINS_COLOR } from '@/const/colors';
 import { DEFAULT_DATE_FORMAT } from '@/const/date';
 import { getAdjustedValue } from '@/lib/getAdjustedValue';
-import { Meal, MealType } from '@/model/meal';
+import { getWeekRange } from '@/lib/getWeekRange';
+import { Meal, MealGroup, MealType } from '@/model/meal';
 
 import { AnalysisDailyScore } from '../analysis-daily-score';
 import css from './analysis-block.module.css';
 
 export const AnalysisBlock = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [dailyMeal, setDailyMeal] = useState<Meal[]>([]);
+  const [weekMeals, setWeekMeals] = useState<MealGroup[]>([]);
+
+  const weekRange = useMemo(() => {
+    if (currentDate) {
+      return getWeekRange(currentDate);
+    }
+    return null;
+  }, [currentDate]);
 
   useEffect(() => {
     const tgId = window?.Telegram?.WebApp?.initDataUnsafe?.user?.id;
-    if (!isLoading && tgId) {
+    if (!isLoading && tgId && weekRange) {
       setIsLoading(true);
-      getMealsByUser(tgId.toString(), dayjs(new Date()).format('YYYY-MM-DD')).then(setDailyMeal);
+      getMealsByUser(tgId.toString(), weekRange).then((res) => {
+        setWeekMeals(res);
+        const currentDayMeal = res.find((group) => dayjs(currentDate).format('DD-MM-YYYY') === group.date);
+        if (currentDayMeal) {
+          setDailyMeal(currentDayMeal?.meals);
+        }
+      });
       setIsLoading(false);
     }
-  }, [isLoading]);
+  }, [isLoading, weekRange]);
 
   const dailyKcalValue = useMemo(() => {
-    return dailyMeal.reduce((sum, meal) => sum + meal.kcal, 0);
+    if (dailyMeal.length > 0) {
+      return dailyMeal.reduce((sum, meal) => sum + meal.kcal, 0);
+    }
+    return 0;
   }, [dailyMeal]);
 
   const meals = useMemo(() => {
     return [MealType.BREAKFAST, MealType.LUNCH, MealType.DINNER].map((type) => {
-      const filteredByType = dailyMeal.filter((x) => x.type === type);
+      if (dailyMeal) {
+        const filteredByType = dailyMeal.filter((x) => x.type === type);
+        return {
+          type,
+          nutriments: {
+            proteins: filteredByType.reduce((sum, meal) => sum + getAdjustedValue(meal.protein, meal.amountGrams), 0),
+            fat: filteredByType.reduce((sum, meal) => sum + getAdjustedValue(meal.fat, meal.amountGrams), 0),
+            carbohydrates: filteredByType.reduce((sum, meal) => sum + getAdjustedValue(meal.carbs, meal.amountGrams), 0)
+          }
+        };
+      }
       return {
         type,
         nutriments: {
-          proteins: filteredByType.reduce((sum, meal) => sum + getAdjustedValue(meal.protein, meal.amountGrams), 0),
-          fat: filteredByType.reduce((sum, meal) => sum + getAdjustedValue(meal.fat, meal.amountGrams), 0),
-          carbohydrates: filteredByType.reduce((sum, meal) => sum + getAdjustedValue(meal.carbs, meal.amountGrams), 0)
+          proteins: 0,
+          fat: 0,
+          carbohydrates: 0
         }
       };
     });

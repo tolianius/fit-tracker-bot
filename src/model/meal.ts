@@ -1,7 +1,12 @@
+export type MealGroup = {
+  date: string;
+  meals: Meal;
+};
+
 export type Meal = {
   tgId?: string;
   type?: MealType | null;
-  date?: string | null; // формат YYYY-MM-DD
+  date?: string | null;
   kcal?: number;
   protein?: number;
   fat?: number;
