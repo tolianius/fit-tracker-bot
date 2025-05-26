@@ -7,6 +7,8 @@ export type Meal = {
   fat?: number;
   carbs?: number;
   barcode?: string;
+  productName?: string;
+  amountGrams?: number;
 };
 
 export enum MealType {

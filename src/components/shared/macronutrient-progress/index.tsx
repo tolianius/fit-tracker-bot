@@ -46,7 +46,7 @@ export const MacronutrientProgress = (props: IProps) => {
           }}
         >
           <Progress showInfo={false} percent={100} strokeColor={item.color} strokeWidth={4} />
-          <Typography.Text type="secondary">{`${item.grams} ${item.label?.[0]}`}</Typography.Text>
+          <Typography.Text type="secondary">{`${item.grams.toFixed(1)} ${item.label?.[0]}`}</Typography.Text>
         </Flex>
       ))}
     </Flex>

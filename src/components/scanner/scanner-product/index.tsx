@@ -1,9 +1,9 @@
 'use client';
 
-import { Button, Flex, Typography } from 'antd';
+import { Button, Flex, Form, InputNumber, Typography } from 'antd';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { addMeal } from '@/api';
 import { APP_ROUTES } from '@/const/routes';
@@ -16,9 +16,14 @@ interface IProps {
   item: IProduct;
 }
 
+interface IAddProductValues {
+  amountGrams: number;
+}
+
 export const ScannerProduct = (props: IProps) => {
   const { item, barcode } = props;
   const searchParams = useSearchParams();
+  const [form] = Form.useForm<IAddProductValues>();
   const { replace } = useRouter();
 
   const type = searchParams.get('type');
@@ -31,34 +36,40 @@ export const ScannerProduct = (props: IProps) => {
     },
     {
       label: 'Энергетическая ценность',
-      value: `${item?.product?.nutriments?.energy_value} ${item?.product?.nutriments?.energy_unit}`
+      value: `${item?.product?.nutriments?.energy_100g} ${item?.product?.nutriments?.energy_unit}`
     },
     {
       label: 'Белки',
-      value: `${item?.product?.nutriments?.proteins} ${item?.product?.nutriments?.proteins_unit}`
+      value: `${item?.product?.nutriments?.proteins_100g} ${item?.product?.nutriments?.proteins_unit}`
     },
     {
       label: 'Жиры',
-      value: `${item?.product?.nutriments?.fat} ${item?.product?.nutriments?.fat_unit}`
+      value: `${item?.product?.nutriments?.fat_100g} ${item?.product?.nutriments?.fat_unit}`
     },
     {
       label: 'Углеводы',
-      value: `${item?.product?.nutriments?.carbohydrates} ${item?.product?.nutriments?.carbohydrates_unit}`
+      value: `${item?.product?.nutriments?.carbohydrates_100g} ${item?.product?.nutriments?.carbohydrates_unit}`
     }
   ];
 
-  const onAddClick = async () => {
+  useEffect(() => {
+    form.setFieldValue(['amountGrams'], item?.product?.product_quantity);
+  }, [item]);
+
+  const onAddClick = async (values: IAddProductValues) => {
     const tgId = window?.Telegram?.WebApp?.initDataUnsafe?.user?.id;
 
     await addMeal({
       barcode: item?.code,
       date,
       type: type as MealType,
-      protein: item?.product?.nutriments?.proteins,
-      kcal: item?.product?.nutriments?.['energy_value'],
-      carbs: item?.product?.nutriments?.carbohydrates,
-      fat: item?.product?.nutriments?.fat,
-      tgId: tgId?.toString()
+      protein: item?.product?.nutriments?.proteins_100g,
+      kcal: item?.product?.nutriments?.['energy-kcal_100g'],
+      carbs: item?.product?.nutriments?.carbohydrates_100g,
+      fat: item?.product?.nutriments?.fat_100g,
+      tgId: tgId?.toString(),
+      productName: item?.product?.product_name,
+      ...values
     }).then(() => {
       replace(APP_ROUTES.ANALYSIS);
     });
@@ -83,9 +94,18 @@ export const ScannerProduct = (props: IProps) => {
           );
         })}
       </Flex>
-      <Button type="primary" onClick={onAddClick}>
-        Добавить
-      </Button>
+      <Flex justify="center">
+        <Form layout="inline" form={form} onFinish={onAddClick}>
+          <Form.Item required name="amountGrams">
+            <InputNumber suffix="g" />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" block onClick={() => form.submit()}>
+              Добавить
+            </Button>
+          </Form.Item>
+        </Form>
+      </Flex>
     </Flex>
   );
 };

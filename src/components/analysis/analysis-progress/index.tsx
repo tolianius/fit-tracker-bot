@@ -16,7 +16,7 @@ export const AnalysisProgress = (props: IProps) => {
     <Flex vertical gap={8}>
       <Typography.Title level={5}>{title}</Typography.Title>
       <Progress showInfo={false} percent={(value * 100) / maxValue} size="small" strokeColor={color} />
-      <Typography.Text type="secondary">{`${value} из ${maxValue}`}</Typography.Text>
+      <Typography.Text type="secondary">{`${value.toFixed(1)} из ${maxValue}`}</Typography.Text>
     </Flex>
   );
 };
