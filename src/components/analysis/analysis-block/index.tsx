@@ -44,7 +44,7 @@ export const AnalysisBlock = () => {
       });
       setIsLoading(false);
     }
-  }, [isLoading, weekRange]);
+  }, [currentDate, isLoading, weekRange]);
 
   const dailyKcalValue = useMemo(() => {
     if (dailyMeal.length > 0) {
@@ -127,7 +127,7 @@ export const AnalysisBlock = () => {
           />
         </Col>
       </Row>
-      <AnalysisWeekProgress />
+      {weekRange && <AnalysisWeekProgress currentDate={currentDate} dateRange={weekRange} mealsGroup={weekMeals} />}
       {meals.map((item, index) => {
         return <MealItem key={index} {...item} />;
       })}

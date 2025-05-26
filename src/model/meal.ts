@@ -1,6 +1,6 @@
 export type MealGroup = {
   date: string;
-  meals: Meal;
+  meals: Meal[];
 };
 
 export type Meal = {

@@ -1,8 +1,8 @@
 import { Flex, Typography } from 'antd';
 import React, { useState } from 'react';
 
+import { fetchProduct } from '@/api';
 import { BarcodeScanner } from '@/components/shared';
-import { fetchProduct } from '@/lib/fetchProduct';
 import { IProduct } from '@/model/product';
 
 import { ScannerProduct } from '../scanner-product';
