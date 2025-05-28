@@ -4,7 +4,9 @@ export interface IProduct {
 }
 
 export interface IProductInfo {
+  _id: string;
   product_quantity: string;
+  product_quantity_unit: string;
   quantity: string;
   product_name: string;
   image_front_small_url: string;

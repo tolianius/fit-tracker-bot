@@ -29,7 +29,7 @@ export const MealItem = (props: IProps) => {
 
   const onScanClick = () => {
     const date = dayjs(new Date()).format('YYYY-MM-DD');
-    replace(APP_ROUTES.SCANNER + `?type=${type}&date=${date}`);
+    replace(APP_ROUTES.PRODUCTS + `?type=${type}&date=${date}`);
   };
 
   return (
