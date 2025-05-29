@@ -3,3 +3,8 @@
     background-color: #0000000f !important;
     border-radius: 16px;
 }
+
+.mealCollapse {
+    border: none !important;
+    background-color: transparent !important;
+}

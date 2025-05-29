@@ -63,7 +63,8 @@ export const AnalysisBlock = () => {
             proteins: filteredByType.reduce((sum, meal) => sum + getAdjustedValue(meal.protein, meal.amountGrams), 0),
             fat: filteredByType.reduce((sum, meal) => sum + getAdjustedValue(meal.fat, meal.amountGrams), 0),
             carbohydrates: filteredByType.reduce((sum, meal) => sum + getAdjustedValue(meal.carbs, meal.amountGrams), 0)
-          }
+          },
+          meals: filteredByType
         };
       }
       return {
@@ -72,7 +73,8 @@ export const AnalysisBlock = () => {
           proteins: 0,
           fat: 0,
           carbohydrates: 0
-        }
+        },
+        meals: []
       };
     });
   }, [dailyMeal]);

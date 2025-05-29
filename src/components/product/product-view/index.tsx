@@ -80,7 +80,7 @@ export const ProductView = () => {
       fat: item?.product?.nutriments?.fat_100g,
       tgId: tgId?.toString(),
       productName: item?.product?.product_name,
-      ...values
+      amountGrams: Number(values?.amountGrams)
     }).then(() => {
       replace(APP_ROUTES.ANALYSIS);
     });
@@ -141,7 +141,14 @@ export const ProductView = () => {
           <Skeleton.Input style={{ width: 200 }} active />
         ) : (
           <Form layout="inline" form={form} onFinish={onAddClick}>
-            <Form.Item required name="amountGrams">
+            <Form.Item
+              rules={[
+                {
+                  required: true
+                }
+              ]}
+              name="amountGrams"
+            >
               <InputNumber suffix="g" />
             </Form.Item>
             <Form.Item>
