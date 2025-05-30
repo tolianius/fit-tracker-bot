@@ -13,5 +13,5 @@ export const fetchProduct = async (barcode: string): Promise<IProduct | null> =>
     return null;
   }
 
-  return data.product;
+  return data;
 };

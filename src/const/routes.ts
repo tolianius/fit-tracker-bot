@@ -1,5 +1,8 @@
 export const APP_ROUTES = {
   ANALYSIS: '/',
+  PRODUCTS: '/products',
+  PROFILE: '/profile',
+  PRODUCT: (code: string) => `/products/${code}`,
   SCANNER: '/scanner',
-  PROFILE: '/profile'
+  ADD_PRODUCT: '/products/add'
 };

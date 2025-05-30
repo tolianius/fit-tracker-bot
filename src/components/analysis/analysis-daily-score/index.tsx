@@ -5,7 +5,7 @@ import { Flex, Progress, Typography } from 'antd';
 import css from './analysis-daily-score.module.css';
 
 interface IProps {
-  value: number;
+  value?: number;
   maxValue: number;
 }
 

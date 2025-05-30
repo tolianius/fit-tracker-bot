@@ -1,6 +1,6 @@
 'use client';
 
-import { BarChartOutlined, ScanOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { BarChartOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import { Button, Flex } from 'antd';
 import { useRouter } from 'next/navigation';
 
@@ -13,10 +13,6 @@ export const Footer = () => {
 
   const onAnalysisClick = () => {
     replace(APP_ROUTES.ANALYSIS);
-  };
-
-  const onScanClick = () => {
-    replace(APP_ROUTES.SCANNER);
   };
 
   const onProfileClick = () => {
@@ -32,13 +28,6 @@ export const Footer = () => {
           shape="circle"
           size="large"
           onClick={onAnalysisClick}
-        />
-        <Button
-          type="primary"
-          icon={<ScanOutlined style={{ fontSize: '16px' }} />}
-          shape="circle"
-          size="large"
-          onClick={onScanClick}
         />
         <Button
           type="primary"

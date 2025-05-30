@@ -1,47 +1,32 @@
-import { Flex, Typography } from 'antd';
-import React, { useState } from 'react';
+import { LeftOutlined } from '@ant-design/icons';
+import { Button, Flex } from 'antd';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React from 'react';
 
-import { ProductItem } from '@/components/product';
 import { BarcodeScanner } from '@/components/shared';
-import { fetchProduct } from '@/lib/fetchProduct';
+import { APP_ROUTES } from '@/const/routes';
+import { getQueryString } from '@/lib/getQueryString';
 
 export const ScannerView = () => {
-  const [barcode, setBarcode] = useState<string | null>(null);
-  const [product, setProduct] = useState<any>();
-  const [error, setError] = useState<string | null>(null);
+  const { replace, back } = useRouter();
+  const searchParams = useSearchParams();
 
   const handleScan = async (code: string) => {
-    setBarcode(code);
-    setError(null);
-
-    try {
-      const productData = await fetchProduct(code);
-
-      if (!productData) {
-        setProduct(null);
-        setError('Продукт не найден в базе Open Food Facts.');
-      } else {
-        setProduct(productData);
-      }
-    } catch (err) {
-      setError('Ошибка при получении данных с сервера.');
-      console.error(err);
-    }
+    const query = getQueryString(searchParams);
+    replace(APP_ROUTES.PRODUCT(code) + `?${query}`);
   };
 
   return (
     <Flex vertical style={{ width: '100%' }}>
-      {!barcode && <BarcodeScanner onResult={handleScan} />}
-
-      {barcode && (
-        <Flex vertical gap={16}>
-          <Typography.Title level={3} style={{ textAlign: 'center' }}>
-            Продукт
-          </Typography.Title>
-          {product && <ProductItem product={product} />}
-          {error && <Typography.Text>{error}</Typography.Text>}
-        </Flex>
-      )}
+      <Button
+        type="primary"
+        icon={<LeftOutlined />}
+        shape="circle"
+        size="small"
+        onClick={back}
+        style={{ position: 'absolute', left: '16px', top: '27px', zIndex: 2 }}
+      />
+      <BarcodeScanner onResult={handleScan} />
     </Flex>
   );
 };
