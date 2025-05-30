@@ -18,7 +18,7 @@ export const ProductsListView = () => {
   const { push } = useRouter();
   const [state, setState] = useState({
     query: '',
-    products: [] as IProductInfo[],
+    products: [] as any[],
     page: 1,
     hasMore: true,
     loading: false
@@ -32,8 +32,7 @@ export const ProductsListView = () => {
       const { products: newProducts, total } = await searchProductByName(search, pageNum, 10);
       setState((prev) => ({
         ...prev,
-        products:
-          pageNum === 1 ? (newProducts as IProductInfo[]) : ([...prev.products, ...newProducts] as IProductInfo[]),
+        products: pageNum === 1 ? (newProducts as any[]) : ([...prev.products, ...newProducts] as any[]),
         hasMore: pageNum * 10 < total,
         loading: false,
         page: pageNum
@@ -43,12 +42,13 @@ export const ProductsListView = () => {
     }
   };
 
-  const debouncedSearch = useCallback(
-    debounce((val: string) => {
-      fetchData(val, 1);
-    }, 500),
-    []
-  );
+  const debounced = debounce((val: string) => {
+    fetchData(val, 1);
+  }, 500);
+
+  const debouncedSearch = useCallback((val: string) => {
+    debounced(val);
+  }, []);
 
   useEffect(() => {
     if (state.query && debouncedSearch && !state.loading) debouncedSearch(state.query);

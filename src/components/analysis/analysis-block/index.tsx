@@ -37,7 +37,7 @@ export const AnalysisBlock = () => {
       setIsLoading(true);
       getMealsByUser(tgId.toString(), weekRange).then((res) => {
         setWeekMeals(res);
-        const currentDayMeal = res.find((group) => dayjs(currentDate).format('DD-MM-YYYY') === group.date);
+        const currentDayMeal = res.find((group: MealGroup) => dayjs(currentDate).format('DD-MM-YYYY') === group?.date);
         if (currentDayMeal) {
           setDailyMeal(currentDayMeal?.meals);
         }
@@ -48,7 +48,7 @@ export const AnalysisBlock = () => {
 
   const dailyKcalValue = useMemo(() => {
     if (dailyMeal.length > 0) {
-      return dailyMeal.reduce((sum, meal) => sum + meal.kcal, 0);
+      return dailyMeal.reduce((sum, meal) => sum + (meal.kcal ?? 0), 0);
     }
     return 0;
   }, [dailyMeal]);

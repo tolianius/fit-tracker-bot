@@ -19,7 +19,7 @@ export const AnalysisDailyScore = (props: IProps) => {
         <Typography.Title>{value}</Typography.Title>
         <Typography.Text>{`ИЗ ${maxValue}`}</Typography.Text>
       </Flex>
-      <Progress type="circle" percent={Math.trunc((value * 100) / maxValue)} strokeColor={'#FFFFFF'} />
+      <Progress type="circle" percent={Math.trunc(((value ?? 0) * 100) / maxValue)} strokeColor={'#FFFFFF'} />
     </Flex>
   );
 };

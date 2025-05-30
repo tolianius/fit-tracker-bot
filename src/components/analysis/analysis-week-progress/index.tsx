@@ -40,7 +40,7 @@ export const AnalysisWeekProgress = (props: IProps) => {
       return {
         active: date === dayjs(currentDate).format('DD-MM-YYYY'),
         day: shortDateName[index],
-        kcal: result ? result.meals.reduce((sum, meal) => sum + meal.kcal, 0) : 0,
+        kcal: result ? result.meals.reduce((sum, meal) => sum + (meal.kcal ?? 0), 0) : 0,
         maxKcal: 2000
       };
     });

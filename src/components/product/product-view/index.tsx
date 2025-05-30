@@ -33,7 +33,11 @@ export const ProductView = () => {
     if (!isLoading && code && !item) {
       setIsLoading(true);
       fetchProduct(code as string)
-        .then(setItem)
+        .then((product) => {
+          if (product) {
+            setItem(product);
+          }
+        })
         .finally(() => setIsLoading(false));
     }
   }, [code, isLoading, item]);
