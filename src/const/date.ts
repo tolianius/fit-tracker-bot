@@ -1,1 +1,2 @@
 export const DEFAULT_DATE_FORMAT = 'DD.MM.YYYY';
+export const SERVER_DATE_FORMAT = 'YYYY-MM-DD';

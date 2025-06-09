@@ -4,5 +4,6 @@ export const APP_ROUTES = {
   PROFILE: '/profile',
   PRODUCT: (code: string) => `/products/${code}`,
   SCANNER: '/scanner',
-  ADD_PRODUCT: '/products/add'
+  ADD_PRODUCT: '/products/add',
+  PROFILE_PARAMETERS: '/profile/parameters'
 };

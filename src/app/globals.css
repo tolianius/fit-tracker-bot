@@ -41,3 +41,7 @@ h1, h2, h3, h4, h5 {
 .ant-divider {
     margin: 8px 0 !important;
 }
+
+.ant-picker, .ant-input-number-affix-wrapper {
+    width: 100% !important;
+}

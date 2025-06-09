@@ -2,13 +2,17 @@
 
 import { FileOutlined, SettingOutlined, StarOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Flex, Typography } from 'antd';
+import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
 import { ILinkButton, LinkButton } from '@/components/shared';
+import { APP_ROUTES } from '@/const/routes';
 
 import css from './profile-view.module.css';
 
 export const ProfileView = () => {
+  const { push } = useRouter();
+
   const avatarUrl = useMemo(() => {
     return window?.Telegram?.WebApp?.initDataUnsafe?.user?.photo_url;
   }, [window?.Telegram?.WebApp?.initDataUnsafe?.user?.photo_url]);
@@ -16,8 +20,10 @@ export const ProfileView = () => {
   const links: ILinkButton[] = [
     {
       icon: <UserOutlined />,
-      title: 'Профиль',
-      onClick: () => {}
+      title: 'Мои параметры',
+      onClick: () => {
+        push(APP_ROUTES.PROFILE_PARAMETERS);
+      }
     },
     {
       icon: <SettingOutlined />,
