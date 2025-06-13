@@ -2,16 +2,27 @@
 
 import { createContext, PropsWithChildren, useContext } from 'react';
 
-import { SessionStore, sessionStore } from '@/stores';
+import { mealStore, MealStore, SessionStore, sessionStore } from '@/stores';
 
-const SessionContext = createContext<SessionStore | null>(null);
+type Stores = {
+  sessionStore: SessionStore;
+  mealStore: MealStore;
+};
+
+const StoresContext = createContext<Stores | null>(null);
+
+export const useMealStore = () => {
+  const stores = useContext(StoresContext);
+  if (!stores) throw new Error('useMealStore must be used within MobxProvider');
+  return stores.mealStore;
+};
 
 export const useSessionStore = () => {
-  const store = useContext(SessionContext);
-  if (!store) throw new Error('useSessionStore must be used within MobxProvider');
-  return store;
+  const stores = useContext(StoresContext);
+  if (!stores) throw new Error('useSessionStore must be used within MobxProvider');
+  return stores.sessionStore;
 };
 
 export function MobxProvider({ children }: PropsWithChildren) {
-  return <SessionContext.Provider value={sessionStore}>{children}</SessionContext.Provider>;
+  return <StoresContext.Provider value={{ sessionStore, mealStore }}>{children}</StoresContext.Provider>;
 }

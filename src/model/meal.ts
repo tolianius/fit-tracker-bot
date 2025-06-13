@@ -16,6 +16,24 @@ export type Meal = {
   amountGrams?: number;
 };
 
+export type DailyMeal = {
+  kcal: number;
+  proteins: number;
+  fat: number;
+  carbohydrates: number;
+  mealsByType: MealByType[];
+};
+
+export type MealByType = {
+  type: MealType;
+  nutriments: {
+    proteins: number;
+    fat: number;
+    carbohydrates: number;
+  };
+  meals: Meal[];
+};
+
 export enum MealType {
   BREAKFAST = 'BREAKFAST',
   LUNCH = 'LUNCH',
