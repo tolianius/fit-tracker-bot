@@ -23,6 +23,8 @@ export const ParametersView = observer(() => {
       tgId,
       ...values,
       birthday: dayjs(values.birthday).format(SERVER_DATE_FORMAT)
+    }).then((res) => {
+      sessionStore.setUser(res);
     });
   };
 
