@@ -2,6 +2,10 @@
     & > span svg {
         color: #91C788 !important;
     }
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .linkIcon {

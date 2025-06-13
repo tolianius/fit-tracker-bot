@@ -3,14 +3,17 @@
 import { LeftOutlined } from '@ant-design/icons';
 import { Button, Col, DatePicker, Flex, Form, InputNumber, Radio, Row, Select, Typography } from 'antd';
 import dayjs from 'dayjs';
+import { observer } from 'mobx-react';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
 import { updateUser, UpdateUserInput } from '@/api';
 import { SERVER_DATE_FORMAT } from '@/const/date';
 import { ActivityLevelType, GenderType, GoalType } from '@/model/user';
+import { useSessionStore } from '@/providers';
 
-export const ParametersView = () => {
+export const ParametersView = observer(() => {
+  const sessionStore = useSessionStore();
   const { back } = useRouter();
   const [form] = Form.useForm<UpdateUserInput>();
 
@@ -31,7 +34,17 @@ export const ParametersView = () => {
           Мои параметры
         </Typography.Title>
       </Flex>
-      <Form layout="vertical" variant="filled" form={form} onFinish={onAddClick} requiredMark="optional">
+      <Form
+        layout="vertical"
+        variant="filled"
+        form={form}
+        onFinish={onAddClick}
+        requiredMark="optional"
+        initialValues={{
+          ...sessionStore?.user,
+          birthday: dayjs(sessionStore?.user?.birthday)
+        }}
+      >
         <Row gutter={[16, 0]}>
           <Col xs={8}>
             <Form.Item
@@ -157,4 +170,4 @@ export const ParametersView = () => {
       </Form>
     </Flex>
   );
-};
+});

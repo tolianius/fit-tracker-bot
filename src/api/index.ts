@@ -1,5 +1,4 @@
 export { fetchOrCreateUser } from './user/fetchOrCreateUser';
-export { getUserTargets } from './user/getUserTargets';
 export { updateUser, UpdateUserInput } from './user/updateUser';
 
 export { getMealsByUser } from './meal/getMealsByUser';

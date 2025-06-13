@@ -1,3 +1,5 @@
+import { MealGroup } from '@/model/meal';
+
 export enum GenderType {
   MALE = 'MALE',
   FEMALE = 'FEMALE'
@@ -16,3 +18,15 @@ export enum GoalType {
 }
 
 export type UserTargets = { kcal: number; protein: number; fat: number; carbs: number };
+
+export type User = {
+  id: number;
+  tgId: string;
+  weight: number;
+  height: number;
+  birthday: Date;
+  gender: GenderType;
+  activityLevel: ActivityLevelType;
+  goal: GoalType;
+  meals: MealGroup[];
+};

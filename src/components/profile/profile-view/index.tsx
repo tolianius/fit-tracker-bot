@@ -1,6 +1,6 @@
 'use client';
 
-import { FileOutlined, SettingOutlined, StarOutlined, UserOutlined } from '@ant-design/icons';
+import { FileOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Flex, Typography } from 'antd';
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
@@ -25,7 +25,7 @@ export const ProfileView = () => {
         push(APP_ROUTES.PROFILE_PARAMETERS);
       }
     },
-    {
+    /*{
       icon: <SettingOutlined />,
       title: 'Настройки',
       onClick: () => {}
@@ -34,7 +34,7 @@ export const ProfileView = () => {
       icon: <StarOutlined />,
       title: 'Премиум',
       onClick: () => {}
-    },
+    },*/
     {
       icon: <FileOutlined />,
       title: 'Политика конфиденциальности',
